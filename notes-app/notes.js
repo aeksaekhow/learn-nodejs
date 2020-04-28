@@ -3,7 +3,7 @@ const chalk = require('chalk');
 
 const noteFileName = 'notes.json';
 
-const getNotes = function() {
+const getNotes = () => {
 
     // If the file did not exist, then return empty note array
     if (!fs.existsSync(noteFileName)) return [];
@@ -21,12 +21,10 @@ const getNotes = function() {
     return notes;
 }
 
-const addNote = function(title, body) {
+const addNote = (title, body) => {
 
     const notes = getNotes();
-    const duplicatedNotes = notes.filter(function(note) {
-        return note.title === title;
-    });
+    const duplicatedNotes = notes.filter(note => note.title === title);
 
     if (duplicatedNotes.length !== 0) {
         console.log(chalk.red.bold.inverse('Note title taken!'))
@@ -41,12 +39,10 @@ const addNote = function(title, body) {
     console.log(chalk.green.bold.inverse('Note saved successfully'))
 }
 
-const removeNote = function (title) {
+const removeNote = (title) => {
 
     const notes = getNotes();
-    const newNotes = notes.filter(function (note) {
-       return note.title !== title;
-    });
+    const newNotes = notes.filter(note => note.title !== title);
 
     if (notes.length === newNotes.length) {
         console.log(chalk.yellow.bold.inverse('Note title could not be found'))
@@ -59,8 +55,15 @@ const removeNote = function (title) {
     console.log(chalk.green.bold.inverse('Note removed successfully'));
 }
 
+const listNotes = () => {
+
+    console.log(chalk.inverse('Your Notes'))
+    const notes = getNotes();
+    notes.forEach(note => console.log('Title = ' + note.title + ', Body = ' + note.body))
+}
+
 module.exports = {
-    getNotes: getNotes,
     addNote: addNote,
-    removeNote: removeNote
-};
+    removeNote: removeNote,
+    listNotes: listNotes
+}
