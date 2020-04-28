@@ -41,7 +41,26 @@ const addNote = function(title, body) {
     console.log(chalk.green.bold.inverse('Note saved successfully'))
 }
 
+const removeNote = function (title) {
+
+    const notes = getNotes();
+    const newNotes = notes.filter(function (note) {
+       return note.title !== title;
+    });
+
+    if (notes.length === newNotes.length) {
+        console.log(chalk.yellow.bold.inverse('Note title could not be found'))
+        return;
+    }
+
+    const json = JSON.stringify(newNotes);
+    fs.writeFileSync(noteFileName, json);
+
+    console.log(chalk.green.bold.inverse('Note removed successfully'));
+}
+
 module.exports = {
     getNotes: getNotes,
-    addNote: addNote
+    addNote: addNote,
+    removeNote: removeNote
 };
