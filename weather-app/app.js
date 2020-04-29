@@ -17,20 +17,20 @@ yargs.command('weatherInfo [location]', 'Get the weather information based on lo
 
         if (error) {
             console.log(chalk.red.inverse(error))
-            return;
+            return
         }
 
         weatherService.getWeatherInfo(geoData, (error, weatherData) => {
 
             if (error) {
                 console.log(chalk.red.inverse(error))
-                return;
+                return
             }
 
-            console.log(geoData.location);
+            console.log(geoData.location)
             console.log(weatherData)
         })
     })
 })
 
-yargs.parse();
+yargs.parse()
