@@ -38,6 +38,22 @@ app.get('/help', (req, res) => {
     })
 })
 
+app.get('/help/*', (req, res) => {
+    res.render('error', {
+        title: 'Error',
+        name: 'Aek Sae-khow',
+        errorMessage: 'Help article not found.'
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('error', {
+        title: 'Error',
+        name: 'Aek Sae-khow',
+        errorMessage: 'Page not found.'
+    })
+})
+
 app.listen(3000, () => {
     console.log('Web server is up on port 3000')
 })
