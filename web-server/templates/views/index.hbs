@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <title>Weather</title>
@@ -10,9 +9,17 @@
     <div class="main-content">
         {{>header}}
         <p>{{name}}</p>
+
+        <form>
+            <input type="text" placeholder="Location" />
+            <button>Search</button>
+        </form>
+        <p id="addressText"></p>
+        <p id="locationText"></p>
+        <p id="forecastText"></p>
     </div>
     {{>footer}}
 
+    <script type="application/javascript" src="/js/app.js"></script>
 </body>
-</html>
 </html>

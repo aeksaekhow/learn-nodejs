@@ -4,7 +4,7 @@ const hbs = require('hbs')
 const geoService = require('./utils/geoService')
 const weatherService = require('./utils/weatherService')
 
-const app = express();
+const app = express()
 
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public')
