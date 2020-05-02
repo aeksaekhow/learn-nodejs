@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
+const geoService = require('./utils/geoService')
+const weatherService = require('./utils/weatherService')
 
 const app = express();
 
@@ -35,6 +37,40 @@ app.get('/help', (req, res) => {
     res.render('help', {
         title: 'Help',
         name: 'Aek Sae-khow'
+    })
+})
+
+app.get('/weather', (req, res) => {
+
+    const address = req.query.address
+    if (!address) {
+        return res.send({
+            error: 'Address is empty.'
+        })
+    }
+
+    geoService.getGeoInfo(address, (error, geoData) => {
+
+        if (error) {
+            return res.send({
+                error
+            })
+        }
+
+        weatherService.getWeatherInfo(geoData, (error, weatherData) => {
+
+            if (error) {
+                return res.send({
+                    error
+                })
+            }
+
+            return res.send({
+                forecast: weatherData,
+                location: geoData.location,
+                address
+            })
+        })
     })
 })
 
